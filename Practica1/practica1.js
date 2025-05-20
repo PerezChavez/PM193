@@ -17,3 +17,10 @@ function cuadrado (numero) {
 console.log(cuadrado(2)); 
 console.log(cuadrado(5)); 
 console.log(cuadrado(7));
+
+//Ejercicio 1 parte 3
+const saludoPersonalizado = (nombre, edad) => {
+  return `Hola, me llamo ${nombre} y tengo ${edad} años.`;
+};
+
+console.log(saludoPersonalizado("Isay", 37));

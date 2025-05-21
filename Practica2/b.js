@@ -6,5 +6,7 @@ const productos = [
 ];
 
 //Código aquí
+const productosF = productos.filter(producto => producto.precio > 1000);
+const nombres = productosF.map(producto => producto.nombre);
 
 console.log(nombres);

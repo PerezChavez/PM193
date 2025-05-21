@@ -10,3 +10,8 @@ const personas =[
 //Usa .find() para buscar a la persona con nombre "Luis".
 const buscarluis = personas.find (persona => persona.nombre == "Luis");
 console.log("Persona Encontrada con el nombre: ", buscarluis);
+
+//Usa .forEach() para imprimir el nombre de cada persona con su edad.
+personas.forEach(persona => {
+    console.log(`${persona.nombre} tiene ${persona.edad} años`);
+});

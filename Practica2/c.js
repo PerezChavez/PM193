@@ -15,3 +15,7 @@ console.log("Persona Encontrada con el nombre: ", buscarluis);
 personas.forEach(persona => {
     console.log(`${persona.nombre} tiene ${persona.edad} años`);
 });
+
+//Usa .reduce() para sumar todas las edades y obtener un total.
+const SumaDeEdades = personas.reduce((acumulador,persona) => acumulador + persona.edad, 0);
+console.log("La suma de todas las edades es igual a: " , SumaDeEdades)

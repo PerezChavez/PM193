@@ -1,15 +1,19 @@
 /*Zona 1 : Importaciones */
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import React, {useState} from 'react'; //Permite manipular el estado de los componentes 
 
 
-const Texto= (props)=>{
-  const{children}=props
-  return(
-      <Text> {children} </Text>
-  )
-} 
-
+//componente Propio Texto 
+const Texto = () => {
+  const [contenido, setContenido] = useState('Hola Mundo');
+  const actualizaTexto = () => {
+    setContenido('Estado modificado');
+  }
+  return (
+    <Text onPress={actualizaTexto}>{contenido}</Text>
+  );
+}
 
 /*Zona 2 : Main o zona principal*/
 
@@ -20,7 +24,6 @@ export default function App() {
       <Texto >Hola</Texto>
       <Texto >Mundo</Texto>
       <Texto>ReactNative</Texto>
-      <Texto contenido= "Hola"></Texto>
       <Button title='Presionar'></Button>
       <StatusBar style="auto" />
 

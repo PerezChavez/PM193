@@ -3,12 +3,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function Profile() {
   return (
+    
     <View style={styles.container}>
       <View style={styles.iconRow}>
         <Ionicons name="person-outline" size={28} color="green" />
-        <Text style={styles.title}>Perfil de usuario</Text>
+        <Text style={styles.title}> Perfil de usuario </Text>
       </View>
     </View>
+    
   );
 }
 
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginLeft: 10,
     color: 'green',
   },
 });

@@ -1,95 +1,75 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useState } from 'react'; //Importamos useeffect y useState
-import { ActivityIndicator, FlatList, SafeAreaView } from 'react-native'; //Importamos activityIndicator
+import React, { useState } from 'react';
+import { Modal, View, Text, StyleSheet, Button, Pressable } from 'react-native';
 
-const App = () => {
-  const [ loading, setLoading ] = useState(true);
-  const [ users, setUsers ] = useState([]);
+export default function App() {
+  const [modalVisible, setModalVisible] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      fetch('https://jsonplaceholder.typicode.com/users')
-      .then(resp => resp.json())
-      .then(data => {
-        setUsers(data);
-        setLoading(false);
-      })
-      .catch(err => { 
-      console.error('Error al cargar usuarios: ', err);
-      setLoading(false);
-      });
-    }, 2000);
-  }, []);
+  const handleOpenModal = () => {
+    setModalVisible(true);
+  };
 
-
-const renderItem = ({ item }) => (
-  <View style={styles.card}>
-    <Text style={styles.name}> {item.name} </Text>
-    <Text style={styles.text}> {item.email} </Text>
-    <Text style={styles.text}> {item.address.city} </Text>
-    <Text style={styles.text}> {item.company.name} </Text>
-  </View>
-);
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Si aun esta cargando, se muestra el indicador de carga */}
-      {loading ? (
-        <View style= {styles.loadingContainer}>
-          <ActivityIndicator
-            size= "large"
-            color= "#007bff" 
-          />
-          <Text style={styles.loadingText}> Cargando usuarios... </Text>
+    <View style={styles.container}>
+      <Button title="Mostrar Modal" onPress={handleOpenModal} />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={handleCloseModal}
+        onShow={() => console.log("Modal mostrado")}
+        onDismiss={() => console.log("Modal cerrado")}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>¡Hola! Este es un modal.</Text>
+            <Pressable style={styles.buttonClose} onPress={handleCloseModal}>
+              <Text style={styles.textStyle}>Cerrar</Text>
+            </Pressable>
+          </View>
         </View>
-      ) : (
-        <FlatList
-          data={users}
-          keyExtractor= { item => item.id.toString() }
-          renderItem= { renderItem }
-          contentContainerStyle= { styles.list }
-          />
-      )}
-    </SafeAreaView>
+      </Modal>
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
-  },
-  loadingContainer:{
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  loadingText: {
-    marginTop: 12, 
-    fontSize: 16,
-    color: '#333',
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
-  list: {
-    paddingBottom: 20,
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    elevation: 5,
   },
-  card: {
-    backgroundColor: '#f0f0f0',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 10,
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+    fontSize: 18,
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+    borderRadius: 10,
+    padding: 10,
     elevation: 2,
   },
-  name : {
-    fontSize: 18,
+  textStyle: {
+    color: 'white',
     fontWeight: 'bold',
-  },
-  text: {
-    fontSize: 14,
-    color: '#333',
-    marginTop: 2,
+    textAlign: 'center',
   },
 });
-
-export default App;
